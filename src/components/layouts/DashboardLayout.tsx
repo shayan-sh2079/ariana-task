@@ -4,8 +4,12 @@ import { Outlet, redirect } from "react-router";
 import { getProfile } from "#/services/dashboard.ts";
 import Button from "#/components/ui/Button.tsx";
 import useDashboardData from "#/pages/dashboard/hooks/useDashboardData.ts";
-import SignOutModal from "#/pages/dashboard/components/SignOutModal.tsx";
 import { Icon } from "@iconify/react";
+import { lazy } from "react";
+
+const SignOutModalLazy = lazy(
+  () => import("#/pages/dashboard/components/SignOutModal.tsx"),
+);
 
 export const loader = async () => {
   const accessTkn = Cookies.get(ACCESS_TKN_KEY);
@@ -73,7 +77,7 @@ export function Component() {
         </div>
       </div>
       {isLogoutModalOpen && (
-        <SignOutModal
+        <SignOutModalLazy
           onConfirm={logoutHandler}
           isLoading={isLoading}
           onClose={closeModalHandler}
