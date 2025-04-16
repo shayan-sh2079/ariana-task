@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, Navigate } from "react-router";
 import RootLayout from "#/components/layouts/RootLayout";
 
 const router = createBrowserRouter([
@@ -6,6 +6,10 @@ const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
+      {
+        path: "",
+        element: <Navigate to="/dashboard" replace />,
+      },
       {
         path: "auth",
         lazy: () => import("#/components/layouts/AuthLayout.tsx"),
