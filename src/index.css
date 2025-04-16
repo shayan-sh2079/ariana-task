@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Geist&display=swap");
+@import "tailwindcss";
+
+@theme {
+    --font-inter: "Inter";
+    --font-geist: "Geist";
+    --font-segoe: "Segoe UI", system-ui, -apple-system, sans-serif;
+
+    --color-gray-400: #E2E8F0;
+    --color-gray-300: #DBDBDB;
+    --color-gray-200: #585858;
+    --color-gray-100: #4E5553;
+    --color-foreground: #020617;
+    --color-muted-foreground: #64748B;
+    --color-destructive: #DC2626;
+    --color-primary: #0F172A;
+    --color-secondary: #F1F5F9;
+    --color-primary-foreground: #F8FAFC;
+
+    --shadow-sm: 0px 1px 2px 0px #0000000D;
+    --shadow-lg: 0px 10px 15px -3px #0000001A;
+}
