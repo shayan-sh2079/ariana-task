@@ -1,6 +1,6 @@
 import baseAxios from "#/services/baseAxios.ts";
 import { AxiosError } from "axios";
-import { AuthRes } from "#/types/responses";
+import { AuthRes, ProfileRes } from "#/types/responses";
 import { toast } from "react-toastify";
 
 interface SignInReq {
@@ -8,9 +8,11 @@ interface SignInReq {
   password: string;
 }
 
+const authBase = "/staff";
+
 export const signUp = async (data: FormData) => {
   try {
-    const res = await baseAxios.post<AuthRes>("/register/", data);
+    const res = await baseAxios.post<AuthRes>(authBase + "/register/", data);
     return res.data.token;
   } catch (e) {
     if (e instanceof AxiosError && e.status === 400) {
@@ -21,7 +23,7 @@ export const signUp = async (data: FormData) => {
 
 export const signIn = async (data: SignInReq) => {
   try {
-    const res = await baseAxios.post<AuthRes>("/auth/", data);
+    const res = await baseAxios.post<AuthRes>(authBase + "/auth/", data);
     return res.data.token;
   } catch (e) {
     if (e instanceof AxiosError) {
@@ -34,7 +36,7 @@ export const signIn = async (data: SignInReq) => {
 
 export const signOut = async (token: string) => {
   try {
-    await baseAxios.delete("/auth/", {
+    await baseAxios.delete(authBase + "/auth/", {
       headers: { Authorization: `Token ${token}` },
     });
     return true;
@@ -43,5 +45,18 @@ export const signOut = async (token: string) => {
       toast.error(e.response?.data.message || "Something went wrong");
     }
     return false;
+  }
+};
+
+export const getProfile = async (token: string) => {
+  try {
+    const res = await baseAxios.get<ProfileRes>(authBase + "/current_user/", {
+      headers: { Authorization: `Token ${token}` },
+    });
+    return res.data;
+  } catch (e) {
+    if (e instanceof AxiosError) {
+      toast.error(e.response?.data.message || "Something went wrong");
+    }
   }
 };

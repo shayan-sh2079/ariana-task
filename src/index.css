@@ -1,12 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Geist&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 @import "tailwindcss";
 
 @theme {
     --font-inter: "Inter";
     --font-geist: "Geist";
+    --font-roboto: "Roboto";
     --font-segoe: "Segoe UI", system-ui, -apple-system, sans-serif;
 
+    --color-gray-600: #B6B6B6;
+    --color-gray-500: #999999;
     --color-gray-400: #E2E8F0;
     --color-gray-300: #DBDBDB;
     --color-gray-200: #585858;
@@ -17,7 +21,13 @@
     --color-primary: #0F172A;
     --color-secondary: #F1F5F9;
     --color-primary-foreground: #F8FAFC;
+    --color-quaternary: #787880;
+    --color-red-500: #FF3B30;
 
     --shadow-sm: 0px 1px 2px 0px #0000000D;
     --shadow-lg: 0px 10px 15px -3px #0000001A;
+}
+
+img[height] {
+    height: attr(height px);
 }

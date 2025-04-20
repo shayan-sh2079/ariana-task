@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+import LogoIcon from "#/components/icons/LogoIcon.tsx";
 
 export function Component() {
   return (
@@ -8,9 +9,7 @@ export function Component() {
           "mx-auto w-sm rounded-lg border border-gray-400 p-6 shadow-sm"
         }
       >
-        <h1 className={"text-destructive mb-12 text-center text-4xl font-bold"}>
-          ariana
-        </h1>
+        <LogoIcon className={"mx-auto mb-12 h-16 w-62"} />
         <Outlet />
       </section>
     </div>

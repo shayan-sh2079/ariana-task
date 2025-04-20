@@ -1,11 +1,14 @@
 import Cookies from "js-cookie";
 import { ACCESS_TKN_KEY } from "#/constants/auth.ts";
 import { Outlet, redirect } from "react-router";
-import { getProfile } from "#/services/dashboard.ts";
+import { getProfile } from "#/services/auth.ts";
 import Button from "#/components/ui/Button.tsx";
 import useDashboardData from "#/pages/dashboard/hooks/useDashboardData.ts";
 import { Icon } from "@iconify/react";
 import { lazy } from "react";
+import queryClient from "#/services/queryClient.ts";
+import { QueryClientProvider } from "@tanstack/react-query";
+import LogoIcon from "#/components/icons/LogoIcon.tsx";
 
 const SignOutModalLazy = lazy(
   () => import("#/pages/dashboard/components/SignOutModal.tsx"),
@@ -16,7 +19,11 @@ export const loader = async () => {
   if (!accessTkn) {
     return redirect("/auth/login");
   }
-  const profile = await getProfile(accessTkn);
+
+  const profile = await queryClient.fetchQuery({
+    queryKey: ["profile"],
+    queryFn: async () => await getProfile(accessTkn),
+  });
 
   return { profile, accessTkn };
 };
@@ -35,10 +42,10 @@ export function Component() {
 
   return (
     <>
-      <div className={"flex w-screen"}>
+      <div className={"flex min-h-dvh w-screen"}>
         <aside
           className={
-            "bg-primary-foreground flex min-h-dvh w-60 flex-col justify-between border-r border-gray-400 px-2 pt-6 pb-8"
+            "bg-primary-foreground fixed top-0 bottom-0 left-0 flex min-h-dvh w-60 flex-col justify-between border-r border-gray-400 px-2 pt-6 pb-8"
           }
         >
           <div className={"flex flex-col items-center"}>
@@ -67,12 +74,18 @@ export function Component() {
             </div>
           </Button>
         </aside>
-        <div className={"flex grow flex-col"}>
-          <header className={"bg-primary-foreground h-13.5 w-full px-4 py-3"}>
-            <h1 className={"text-destructive text-2xl font-bold"}>ariana</h1>
+        <div className={"ml-60 flex grow flex-col"}>
+          <header
+            className={
+              "bg-primary-foreground sticky top-0 z-10 h-13.5 w-full px-4 py-3"
+            }
+          >
+            <LogoIcon />
           </header>
           <main className={"flex grow flex-col"}>
-            <Outlet />
+            <QueryClientProvider client={queryClient}>
+              <Outlet />
+            </QueryClientProvider>
           </main>
         </div>
       </div>
