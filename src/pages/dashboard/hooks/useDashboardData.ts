@@ -3,7 +3,7 @@ import { useCallback, useState } from "react";
 import { signOut } from "#/services/auth.ts";
 import Cookies from "js-cookie";
 import { ACCESS_TKN_KEY } from "#/constants/auth.ts";
-import { getProfile } from "#/services/dashboard.ts";
+import { getProfile } from "#/services/auth.ts";
 
 export default function useDashboardData() {
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
