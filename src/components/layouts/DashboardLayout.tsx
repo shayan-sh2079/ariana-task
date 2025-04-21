@@ -42,7 +42,7 @@ export function Component() {
 
   return (
     <>
-      <div className={"flex min-h-dvh w-screen"}>
+      <div className={"flex min-h-dvh"}>
         <aside
           className={
             "bg-primary-foreground fixed top-0 bottom-0 left-0 flex min-h-dvh w-60 flex-col justify-between border-r border-gray-400 px-2 pt-6 pb-8"
